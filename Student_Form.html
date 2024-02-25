@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border: 1px solid black;
+            border-spacing: 0px;
+           
+         } 
+        th,td{
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        .first-table{
+            background-color: lightblue;
+        }
+        .second-table{
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 15px;
+        } 
+
+        #list{
+            width: 170px;
+        }
+
+       #entry{
+        width: 230px;
+        height: 20px;
+        font-size: 13px;
+        font-family: cursive,sans-serif;
+        background-color: #001a66;
+        color: whitesmoke;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.5);
+        /* margin-left: 40px; */
+        /* margin: 10px 10px; */
+        text-align: center;
+        /* text-decoration: double; */    
+       }
+
+       #second-table{
+        margin-top: 30px;
+       }
+       #second-head{
+        padding:30px
+       }
+       #delete{
+        background-color: red;
+       }
+
+    </style>
+</head>
+<body>
+    <!----------fIRST tABLE--------------------------------->
+    <table class="first-table">
+        <tr>
+            <th>Name</th>
+            <td><input id="input-name"></td>
+        </tr>
+        <tr>
+            <th>Age</th>
+            <td><input id="input-age"></td>
+        </tr>
+        <tr>
+            <th>Gender</th>
+            <td>
+                <div>
+                    <input type="radio"  name="gender"   value="Male">
+                    <label   for="MaleGender">Male</label>
+    
+                    <input type="radio"   name="gender"   value="FeMale">
+                    <label  for="FeMale">FeMale</label>
+                </div>
+              
+                
+            </td>           
+        </tr>
+        <tr>
+            <th>Course</th>
+            <td>
+               <select id="list" >
+                <option value="JavaScript">JavaScript</option>
+                <option value="Phython">Phython</option>
+                <option value="Java">Java</option>
+               </select>
+            </td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td><input type="email" id="inputemail"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button id="entry" onclick="Change()">Save</button>               
+            </td>          
+        </tr>
+        
+    </table>
+     
+    <!-----------------SECOND TABLE--------------------------->
+    <table id="second-table">
+        <tr id="second-head">
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Course</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+       
+    </table>
+
+    <script>
+      
+
+      var row = 1;
+      
+        
+        function  Change(){
+
+            let inputname = document.getElementById("input-name").value
+            let inputage = document.getElementById("input-age").value
+            
+            let gender;
+            var radio = document.getElementsByName('gender');
+            for(i =0;i<radio.length;i++){
+                if(radio[i].checked)
+                // outputgender.textContent = radio[i].value
+                gender = radio[i].value              
+            }
+                     
+            var course = document.getElementById("list").value
+            console.log(course)
+            var emailinput = document.getElementById("inputemail").value
+
+            // if(!inputname || !inputage || !gender ||!course || !emailinput){
+            //     alert("Please Enter All Details")
+            //     return;
+            // }
+
+            var Action = document.getElementById("Action");
+            var secondTable = document.getElementById("second-table");
+            var  newRow = secondTable.insertRow(row);
+            var newCell = newRow.insertCell(0);
+            var newCel2 = newRow.insertCell(1);
+            var newCel3 = newRow.insertCell(2);
+            var newCel4 = newRow.insertCell(3);
+            var newCel5 = newRow.insertCell(4);
+            var newCel6 = newRow.insertCell(5);
+
+            newCell.innerHTML = inputname;
+            newCel2.innerHTML = inputage;
+            newCel3.innerHTML = gender;
+            newCel4.innerHTML = course;
+            newCel5.innerHTML = emailinput;
+            newCel6.innerHTML = "<button id='delete' onclick='Delete(this)'>Delete</button>"
+
+            row++;
+        }
+
+        // function Delete(event){
+        //     event.target.deleteRow("row");
+        // }
+
+        function Delete(button) {
+        // var rno = document.getElementById("second-table"),rowIndex;
+        // var rno = event.rowIndex;
+        var cell = button.parentNode;
+        var row = cell.parentNode;
+        var table = row.parentNode;
+        
+        var rowIndex = row.rowIndex;
+        table.deleteRow(rowIndex);
+        // return;
+        // var i = r.rowIndex;
+        // document.getElementById("second-table").deleteRow(i);
+}
+        
+    </script>  
+
+</body>
+</html>
